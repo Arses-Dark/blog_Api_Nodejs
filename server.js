@@ -4,10 +4,14 @@ require('dotenv').config({
 const morgan=require('morgan')
 
 const express=require('express')
-const connectDB=require('./config/dbConnect')
+const connectDB=require('./db/dbConnect')
+
+connectDB()
 
 
 const app=express()
+
+app.use(express.json())
 if(process.env.NODE_ENV=='development'){
     app.use(morgan('dev'))
 }
@@ -26,12 +30,10 @@ class CategoriesController{
     async delete(req,res){}
     async update(req,res){}  
 }
-
-
-app.get('/',(req,res)=>
-{
-    res.send("hello Worlds")
+app.get('/',(req,res)=>{
+    res.send("Hello World")
 })
-
+const usersRoutes=require("./routes/users/usersRoutes")
+app.use('/api/v1/users',usersRoutes)
 const port=process.env.PORT || 5000
 app.listen(3000)

@@ -23,7 +23,7 @@ class UsersRouter {
     }
   
     getRouter() {
-      return this.router;
+      return this.userRouter;
     }
   }
   
